@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 // import App from "./App";
-// import App from "./App.Info";
-import App from "./App.Average";
+import App from "./App.Info";
+// import App from "./App.Average";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(

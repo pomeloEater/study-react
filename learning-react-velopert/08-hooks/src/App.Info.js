@@ -1,6 +1,7 @@
 // import React, { useState } from "react";
 // import Info from "./Info";
-import Info from "./InfoUseReducer";
+// import Info from "./InfoUseReducer";
+import Info from "./InfoUseInputs";
 
 const App = () => {
   return <Info />;
