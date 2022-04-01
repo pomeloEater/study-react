@@ -1,4 +1,5 @@
 import { useRef, useCallback, useState } from "react";
+import produce from "immer";
 
 const App = () => {
   const nextId = useRef(1);
@@ -9,16 +10,18 @@ const App = () => {
   });
 
   /* input 수정을 위한 함수 */
-  const onChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setForm({
-        ...form,
-        [name]: [value],
-      });
-    },
-    [form]
-  );
+  const onChange = useCallback((e) => {
+    const { name, value } = e.target;
+    // setForm({
+    //   ...form,
+    //   [name]: [value],
+    // });
+    setForm(
+      produce((draft) => {
+        draft[name] = value;
+      })
+    );
+  }, []);
 
   /* form 등록을 위한 함수 */
   const onSubmit = useCallback(
@@ -31,7 +34,12 @@ const App = () => {
       };
 
       /* array에 새 항목 등록 */
-      setData({ ...data, array: data.array.concat(info) });
+      // setData({ ...data, array: data.array.concat(info) });
+      setData(
+        produce((draft) => {
+          draft.array.push(info);
+        })
+      );
 
       /* form 초기화 */
       setForm({
@@ -40,16 +48,21 @@ const App = () => {
       });
       nextId.current += 1;
     },
-    [data, form.name, form.username]
+    [form.name, form.username]
   );
 
   /* 항목을 삭제하는 함수 */
-  const onRemove = useCallback(
-    (id) => {
-      setData({ ...data, array: data.array.filter((info) => info.id !== id) });
-    },
-    [data]
-  );
+  const onRemove = useCallback((id) => {
+    // setData({ ...data, array: data.array.filter((info) => info.id !== id) });
+    setData(
+      produce((draft) => {
+        draft.array.splice(
+          draft.array.findIndex((info) => info.id === id),
+          1
+        );
+      })
+    );
+  }, []);
 
   return (
     <div>
