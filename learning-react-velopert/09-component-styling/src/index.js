@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 // import App from './App';
-import App from "./App.SassComponent";
+// import App from "./App.SassComponent";
+import App from "./App.CSSModule";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
