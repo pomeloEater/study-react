@@ -1,0 +1,7 @@
+#dependencies
+/node_modules
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+/dist
