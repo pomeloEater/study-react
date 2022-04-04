@@ -1,5 +1,6 @@
 // import ColorContext from "../contexts/color";
-import { ColorConsumer } from "../contexts/color";
+import ColorContext, { ColorConsumer } from "../contexts/color";
+import React, { useContext } from "react";
 
 // const ColorBox = () => {
 //   return (
@@ -18,31 +19,53 @@ import { ColorConsumer } from "../contexts/color";
 //   );
 // };
 
+// const ColorBox = () => {
+//   return (
+//     <ColorConsumer>
+//       {/* {(value) => { */}
+//       {({ state }) => (
+//         <>
+//           <div
+//             style={{
+//               width: "64px",
+//               height: "64px",
+//               // background: value.state.color,
+//               background: state.color,
+//             }}
+//           />
+//           <div
+//             style={{
+//               width: "32px",
+//               height: "32px",
+//               // background: value.state.subcolor,
+//               background: state.subcolor,
+//             }}
+//           />
+//         </>
+//       )}
+//     </ColorConsumer>
+//   );
+// };
+
 const ColorBox = () => {
+  const { state } = useContext(ColorContext);
   return (
-    <ColorConsumer>
-      {/* {(value) => { */}
-      {({ state }) => (
-        <>
-          <div
-            style={{
-              width: "64px",
-              height: "64px",
-              // background: value.state.color,
-              background: state.color,
-            }}
-          />
-          <div
-            style={{
-              width: "32px",
-              height: "32px",
-              // background: value.state.subcolor,
-              background: state.subcolor,
-            }}
-          />
-        </>
-      )}
-    </ColorConsumer>
+    <>
+      <div
+        style={{
+          width: "64px",
+          height: "64px",
+          background: state.color,
+        }}
+      />
+      <div
+        style={{
+          width: "32px",
+          height: "32px",
+          background: state.subcolor,
+        }}
+      />
+    </>
   );
 };
 
