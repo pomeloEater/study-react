@@ -1,13 +1,15 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Counter from '../components/Counter';
 import { increase, decrease } from '../modules/counter';
 
-const CounterContainer = ({ number, increase, decrease }) => {
-  return (
-    <Counter number={number} onIncrease={increase} onDecrease={decrease} />
-  );
-};
+// const CounterContainer = ({ number, increase, decrease }) => {
+//   return (
+//     <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+//   );
+// };
 /*
   connect(mapStateToProps, mapDispatchToProps)(연동할 컴포넌트)
     - mapStateToProps
@@ -53,19 +55,19 @@ const CounterContainer = ({ number, increase, decrease }) => {
 */
 
 /* bindActionCreators 유틸 함수를 사용 */
-export default connect(
-  (state) => ({
-    number: state.counter.number,
-  }),
-  (dispatch) =>
-    bindActionCreators(
-      {
-        increase,
-        decrease,
-      },
-      dispatch,
-    ),
-)(CounterContainer);
+// export default connect(
+//   (state) => ({
+//     number: state.counter.number,
+//   }),
+//   (dispatch) =>
+//     bindActionCreators(
+//       {
+//         increase,
+//         decrease,
+//       },
+//       dispatch,
+//     ),
+// )(CounterContainer);
 
 /* 
   두 번째 파라미터를 아예 객체 형태로 넣어 주면 connect 함수가 내부적으로 bindActionCreators 작업을 대신해 준다
@@ -79,3 +81,30 @@ export default connect(
     },
   )(CounterContainer);
 */
+
+/* useSelector로 상태 조회하기 */
+// const CounterContainer = () => {
+//   const number = useSelector((state) => state.counter.number);
+//   /* useDispatch를 사용하여 액션 디스패치하기 */
+//   const dispatch = useDispatch();
+//   return (
+//     <Counter
+//       number={number}
+//       onIncrease={() => dispatch(increase())}
+//       onDecrease={() => dispatch(decrease())}
+//     />
+//   );
+// };
+
+/* useCallback 사용하여 최적화 */
+const CounterContainer = () => {
+  const number = useSelector((state) => state.counter.number);
+  const dispatch = useDispatch();
+  const onIncrease = useCallback(() => dispatch(increase()), [dispatch]);
+  const onDecrease = useCallback(() => dispatch(decrease()), [dispatch]);
+  return (
+    <Counter number={number} onIncrease={onIncrease} inDecrease={onDecrease} />
+  );
+};
+
+export default CounterContainer;
