@@ -4,8 +4,8 @@ import SampleContainer from "./containers/SampleContainer";
 const App = () => {
   return (
     <div>
-      {/* <CounterContainer /> */}
-      <SampleContainer />
+      <CounterContainer />
+      {/* <SampleContainer /> */}
     </div>
   );
 };
