@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 const Menu = () => {
   return (
     <ul>
@@ -7,6 +7,9 @@ const Menu = () => {
       </li>
       <li>
         <Link to="/blue">Blue</Link>
+      </li>
+      <li>
+        <Link to="/users">Users</Link>
       </li>
     </ul>
   );
