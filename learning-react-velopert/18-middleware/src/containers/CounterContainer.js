@@ -10,7 +10,7 @@ const CounterContainer = ({ number, increaseAsync, decreaseAsync }) => {
     <Counter
       number={number}
       onIncrease={increaseAsync}
-      onDecrease={increaseAsync}
+      onDecrease={decreaseAsync}
     />
   );
 };
